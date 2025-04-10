@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeReview Pro
 
-## Getting Started
+> "Code reviews: because sometimes 'it works on my machine' isn't good enough."
 
-First, run the development server:
+![CodeReview Pro Banner](./public/banner.png)
+
+
+![CodeReview Pro Banner](./public/banner-full-view.png)
+
+**CodeReview Pro** is an AI-powered code analysis tool that helps you write better code by providing instant feedback on quality, performance, and best practices. Think of it as having a senior developer looking over your shoulder, but without the awkward silence or coffee breath.
+
+## ✨ Features
+
+- **Real-time AI Analysis** - Get instant feedback on your code without waiting for human reviewers
+- **Multi-language Support** - Works with JavaScript, TypeScript, Python, Java, C#, and more!
+- **Resizable Interface** - Drag to adjust the editor and review panels to your liking
+- **Dark/Light Modes** - Because we care about your retinas at 2 AM
+- **Local & Cloud Options** - Run locally with Ollama or in production with OpenAI
+
+## 🎬 Demo
+
+Check out CodeReview Pro in action:
+
+[![CodeReview Pro Demo](https://via.placeholder.com/600x400)](https://youtu.be/your-video-id)
+
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js, React, Material UI
+- **AI Integration**: Ollama (local development), OpenAI (production)
+- **Code Editor**: CodeMirror with syntax highlighting
+- **Markdown**: React Markdown for review rendering
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and pnpm/npm/yarn
+- For local AI: [Ollama](https://ollama.ai) with CodeLlama model
+
+### Installation
+
+1. Clone this repository:
 
 ```bash
+git clone https://github.com/yourusername/codereview-pro.git
+cd codereview-pro
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install 
+# or
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables (see [Environment Setup](#-environment-setup))
+
+4. Start the development server:
+
+```bash
+pnpm run dev
+# or
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) and start reviewing some code!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Environment Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the project root:
 
-## Learn More
+```plaintext
+# For local development with Ollama
+OLLAMA_MODEL=codellama
+OLLAMA_URL=http://localhost:11434
 
-To learn more about Next.js, take a look at the following resources:
+# For production with OpenAI (optional)
+OPENAI_API_KEY=your_openai_api_key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🚨 IMPORTANT: Protecting Your API Keys
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To avoid accidentally pushing your API keys to GitHub:
 
-## Deploy on Vercel
+1. **Add `.env.local` to your `.gitignore` file**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```plaintext
+# .gitignore
+.env.local
+.env.*.local
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Use environment variables in production**:
+   - When deploying to Vercel, add your environment variables in the Vercel dashboard
+   - For other platforms, consult their documentation on secure environment variable storage
+
+3. **Consider using a secrets manager** for team projects
+
+## 🧠 Using Ollama Locally
+
+1. Install Ollama from [ollama.ai](https://ollama.ai)
+2. Pull the CodeLlama model:
+
+```bash
+ollama pull codellama
+```
+
+3. Start Ollama:
+
+```bash
+ollama serve
+```
+
+4. That's it! The app will automatically connect to your local Ollama instance.
+
+## 🚀 Deployment
+
+### Deploying to Vercel
+
+1. Push your code to GitHub (without API keys!)
+2. Connect your repository to Vercel
+3. Add environment variables in the Vercel dashboard
+4. Deploy!
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fcodereview-pro)
+
+## 🎮 Usage Tips
+
+- **Try the Fibonacci example** for a quick demo of the code review capabilities
+- **Resize the panels** by dragging the divider between editor and review
+- **Dark mode** is available via the toggle in the header
+
+## 🤝 Contributing
+
+Found a bug? Have a cool idea? Want to make this even better? Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+
+## 🙏 Acknowledgments
+
+- CodeLlama and OpenAI for the AI magic
+- The Next.js and Material UI teams for the awesome frameworks
+- Coffee, for making this all possible
+
+---
+
+Made with ❤️ and probably too much caffeine
+
+[LinkedIn](https://www.linkedin.com/in/mandeep-singh-23b964122/) • 
+[Github](https://github.com/mandeepsingh110696) • 
+[Portfolio](https://mandeepsinghdev.com/)
