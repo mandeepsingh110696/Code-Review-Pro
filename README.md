@@ -21,7 +21,7 @@
 
 Check out CodeReview Pro in action:
 
-[![CodeReview Pro Demo](https://via.placeholder.com/600x400)](https://youtu.be/your-video-id)
+[![CodeReview Pro Demo]](https://github.com/user-attachments/assets/1519ba18-c955-4fc7-9771-3c886b6811db)
 
 
 ## 🛠️ Tech Stack
