@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Box, Typography, useTheme as useMuiTheme } from "@mui/material"
 import { EditorView } from "@codemirror/view"
-import { basicSetup } from "codemirror"; // New
+import { basicSetup } from "codemirror"
 import { EditorState } from "@codemirror/state"
 import { javascript } from "@codemirror/lang-javascript"
 import { python } from "@codemirror/lang-python"
@@ -17,6 +17,7 @@ import { json } from "@codemirror/lang-json"
 import { markdown } from "@codemirror/lang-markdown"
 import { oneDark } from "@codemirror/theme-one-dark"
 import { getLanguageLabel } from "../lib/utils"
+
 interface CodeEditorProps {
   value: string
   onChange: (value: string) => void
@@ -27,6 +28,13 @@ export default function CodeEditor({ value, onChange, language }: CodeEditorProp
   const [element, setElement] = useState<HTMLElement | null>(null)
   const [editor, setEditor] = useState<EditorView | null>(null)
   const muiTheme = useMuiTheme()
+  const onChangeRef = useRef(onChange)
+  const initialValueRef = useRef(value)
+
+  // Keep onChange ref up to date
+  useEffect(() => {
+    onChangeRef.current = onChange
+  }, [onChange])
 
   const getLanguageExtension = (lang: string) => {
     switch (lang) {
@@ -58,22 +66,19 @@ export default function CodeEditor({ value, onChange, language }: CodeEditorProp
     }
   }
 
+  // Initialize editor when element is ready (ONLY ONCE or when language/theme changes)
   useEffect(() => {
     if (!element) return
 
-    if (editor) {
-      editor.destroy()
-    }
-
     const startState = EditorState.create({
-      doc: value,
+      doc: initialValueRef.current,
       extensions: [
         basicSetup,
         getLanguageExtension(language),
         muiTheme.palette.mode === "dark" ? oneDark : [],
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
-            onChange(update.state.doc.toString())
+            onChangeRef.current(update.state.doc.toString())
           }
         }),
         EditorView.theme({
@@ -119,9 +124,11 @@ export default function CodeEditor({ value, onChange, language }: CodeEditorProp
     return () => {
       view.destroy()
     }
-  }, [element, language, muiTheme.palette.mode,muiTheme.palette.primary.main, editor, onChange, value])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [element, language, muiTheme.palette.mode, muiTheme.palette.primary.main])
+  // Note: We use initialValueRef.current for the initial value, so we don't need value in dependencies
 
-  // Update editor content when value prop changes
+  // Update editor content when value prop changes externally
   useEffect(() => {
     if (editor && value !== editor.state.doc.toString()) {
       editor.dispatch({
