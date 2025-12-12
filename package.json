@@ -30,7 +30,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "clsx": "^2.1.1",
     "codemirror": "^6.0.1",
-    "next": "15.3.6",
+    "next": "^15.3.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
